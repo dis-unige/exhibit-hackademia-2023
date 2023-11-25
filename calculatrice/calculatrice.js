@@ -177,6 +177,18 @@ result.addEventListener("click", function() {
     offset += 1;
   })
   
+  var most_similar = 0;
+  for (let name = 0; name < length(data); i++){
+    for (let j = 0; j < 15; j++){
+      res = data[name][j] + result[j];
+      if (res > most_similar){
+        most_similar = res;
+        concepts[0] = name;
+      }
+    }
+  }
+
+
   if (concepts[0] == undefined){
     input.innerHTML = ""
   }
