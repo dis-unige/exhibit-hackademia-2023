@@ -175,7 +175,6 @@ result.addEventListener("click", function() {
     }
   }
 
-
   input.innerHTML = final_result
 
   resultDisplayed = true; // turning flag if result is displayed
