@@ -126,7 +126,6 @@ result.addEventListener("click", function() {
   // forming an array of numbers. eg for above string it will be: numbers = ["10", "26", "33", "56", "34", "23"]
   var concepts = inputString.split(/\+|\-|\×|\÷/g);
   concepts[concepts.length-1] = concepts[concepts.length-1].slice(0,-1);
-  console.log(concepts);
 
   // forming an array of operators. for above string it will be: operators = ["+", "+", "-", "*", "/"]
   // first we replace all the numbers and dot with empty string and then split
@@ -137,37 +136,47 @@ result.addEventListener("click", function() {
   // as we move we are alterning the original numbers and operators array
   // the final element remaining in the array will be the output
   var offset = 0;
+  var vector_result = Array(15).fill(0);
+  var v1 = vecteurs[concepts[0]]
+  for(let i = 0; i < 15; i++){
+    vector_result[i] += v1[i];
+  }
+
   operators.forEach(op => {
-    var v1 = vecteurs[concepts[0]]
-    var v2 = vecteurs[concepts[1+offset]]
-    var result = Array(13).fill(0);
+    var v = vecteurs[concepts[1+offset]]
 
     if (op == '-') {
-      for(let i = 0; i < 13; i++){
-        result[i] = v1[i] - v2[i];
+      for(let i = 0; i < 15; i++){
+        vector_result[i] -= v[i];
       }
     }
 
     if (op == "+") {
-      for(let i = 0; i < 13; i++){
-        result[i] = v1[i] + v2[i];
+      for(let i = 0; i < 15; i++){
+        vector_result[i] += v[i];
       }
-    }
-
-    v_res = result.join('')
-    if (v_res in names){
-      concepts[0] = names[v_res][0];
     }
     
     offset += 1;
   })
   
-  if (concepts[0] == undefined){
-    input.innerHTML = ""
+  var most_similar = 0;
+  var final_result = "";
+  for (const [name, vector] of Object.entries(vecteurs)){
+    let res = 0;
+    for (let j = 0; j < 15; j++){
+      dt = vector[j] * vector_result[j];
+      res += dt;
+    }
+    console.log(res)
+    if (res > most_similar){
+      most_similar = res;
+      final_result = name;
+    }
   }
-  else{
-    input.innerHTML = concepts[0]; // displaying the output
-  }
+
+
+  input.innerHTML = final_result
 
   resultDisplayed = true; // turning flag if result is displayed
 });

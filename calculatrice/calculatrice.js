@@ -140,7 +140,6 @@ result.addEventListener("click", function() {
   // forming an array of numbers. eg for above string it will be: numbers = ["10", "26", "33", "56", "34", "23"]
   var concepts = inputString.split(/\+|\-|\×|\÷/g);
   concepts[concepts.length-1] = concepts[concepts.length-1].slice(0,-1);
-  console.log(concepts);
 
   // forming an array of operators. for above string it will be: operators = ["+", "+", "-", "*", "/"]
   // first we replace all the numbers and dot with empty string and then split
@@ -176,23 +175,22 @@ result.addEventListener("click", function() {
   })
   
   var most_similar = 0;
-  for (const [cle, valeur] of Object.entries(data)){
+  var final_result = "";
+  for (const [name, vector] of Object.entries(vecteurs)){
+    let res = 0;
     for (let j = 0; j < 15; j++){
-      res += vecteurs[cle][j] * result[j];
-      if (res > most_similar){
-        most_similar = res;
-        concepts[0] = cle;
-      }
+      dt = vector[j] * vector_result[j];
+      res += dt;
+    }
+    console.log(res)
+    if (res > most_similar){
+      most_similar = res;
+      final_result = name;
     }
   }
 
 
-  if (concepts[0] == undefined){
-    input.innerHTML = ""
-  }
-  else {
-    input.innerHTML = concepts[0]
-  }
+  input.innerHTML = final_result
 
   resultDisplayed = true; // turning flag if result is displayed
 });
