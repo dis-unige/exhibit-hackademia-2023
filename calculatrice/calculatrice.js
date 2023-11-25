@@ -174,14 +174,24 @@ result.addEventListener("click", function() {
     
     offset += 1;
   })
+  
+  var most_similar = 0;
+  for (const [cle, valeur] of Object.entries(data)){
+    for (let j = 0; j < 15; j++){
+      res += vecteurs[cle][j] * result[j];
+      if (res > most_similar){
+        most_similar = res;
+        concepts[0] = cle;
+      }
+    }
+  }
 
-  vector_result = vector_result.join("")
-  console.log(vector_result);
-  if (vector_result in names){
-    input.innerHTML = names[vector_result][0];
+
+  if (concepts[0] == undefined){
+    input.innerHTML = ""
   }
   else {
-    input.innerHTML = ""
+    input.innerHTML = concepts[0]
   }
 
   resultDisplayed = true; // turning flag if result is displayed
