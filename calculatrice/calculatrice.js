@@ -56,7 +56,6 @@ const data = {
   'corps humain': '010000000000000',
   'physiologie': '010000000000000',
   'sadomasochisme': '10100000000100',
-
 };
 
 // Convertir les valeurs en listes d'entiers
@@ -152,36 +151,37 @@ result.addEventListener("click", function() {
   // as we move we are alterning the original numbers and operators array
   // the final element remaining in the array will be the output
   var offset = 0;
+  var vector_result = Array(15).fill(0);
+  var v1 = vecteurs[concepts[0]]
+  for(let i = 0; i < 15; i++){
+    vector_result[i] += v1[i];
+  }
+
   operators.forEach(op => {
-    var v1 = vecteurs[concepts[0]]
-    var v2 = vecteurs[concepts[1+offset]]
-    var result = Array(15).fill(0);
+    var v = vecteurs[concepts[1+offset]]
 
     if (op == '-') {
       for(let i = 0; i < 15; i++){
-        result[i] = v1[i] - v2[i];
+        vector_result[i] -= v[i];
       }
     }
 
     if (op == "+") {
       for(let i = 0; i < 15; i++){
-        result[i] = v1[i] + v2[i];
+        vector_result[i] += v[i];
       }
-    }
-
-    v_res = result.join('')
-    if (v_res in names){
-      concepts[0] = names[v_res][0];
     }
     
     offset += 1;
   })
-  
-  if (concepts[0] == undefined){
-    input.innerHTML = ""
+
+  vector_result = vector_result.join("")
+  console.log(vector_result);
+  if (vector_result in names){
+    input.innerHTML = names[vector_result][0];
   }
-  else{
-    input.innerHTML = concepts[0]; // displaying the output
+  else {
+    input.innerHTML = ""
   }
 
   resultDisplayed = true; // turning flag if result is displayed
