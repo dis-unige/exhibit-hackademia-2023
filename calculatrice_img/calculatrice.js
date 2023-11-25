@@ -1,47 +1,61 @@
 // vecteurs
 const data = {
-  'sexualité': '1000000000000',
-  'anatomie': '0100000000000',
-  'violence': '0010000000000',
-  'reproduction': '0001000000000',
-  'maladie': '0000100000000',
-  'psychologie': '0000010000000',
-  'relation': '0000001000000',
-  'travail': '0000000100000',
-  'pornographie': '0000000010000',
-  'orientation sexuelle': '0000000001000',
-  'genre': '0000000000100',
-  'géographie': '0000000000010',
-  'plaisir': '0000000000001',
-  'relations sexuelles': '1000001000000',
-  'mutilations génitales': '0110000000000',
-  'prostitution': '1000001100000',
-  'orgasme': '0000000000001',
-  'masturbation': '1000000000001',
-  'orgasme féminin': '0000000000101',
-  'infections sexuellement transmissibles': '1000101000000',
-  'sexologie': '1000010000000',
-  'fantasmes sexuels': '1000010000000',
-  'couple': '0000010000001',
-  'amour': '0000010000001',
-  'relations amoureuses': '0000010000001',
-  'sexualité féminine': '1000000000100',
-  'sexualité masculine': '1000000000100',
-  'femmes': '0000000000100' ,
-  'hommes': '0000000000100',
-  'homosexualité': '0000000001000',
-  'homosexualité masculine': '0000000001000',
-  'lesbianisme': '0000000001000',
-  'relations hommes-femmes': '0000001000100',
-  'guides touristiques et de visite': '1000000000010',
-  'clubs': '0000000000011',
-  'sauna': '0000000000011',
-  'maisons de prostitution': '1000001100010',
-  'quartiers de la prostitution': '1000001100010',
-  'troubles sexuels': '1000100000000',
-  'organes génitaux': '1100000000000',
-  'séduction': '0000001000001',
-  'sexualité (biologie)': '1000001000000'
+  'sexualité': '100000000000000',
+  'anatomie': '010000000000000',
+  'violence': '001000000000000',
+  'reproduction': '000100000000000',
+  'maladie': '000010000000000',
+  'psychologie': '000001000000000',
+  'relation': '000000100000000',
+  'travail': '000000010000000',
+  'pornographie': '000000001000000',
+  'orientation sexuelle': '000000000100000',
+  'genre': '000000000010000',
+  'géographie': '000000000001000',
+  'plaisir': '000000000000100',
+  'art': '000000000000010',
+  'sociologie': '000000000000001',
+  'relations sexuelles': '100000100000000',
+  'mutilations génitales': '011000000000000',
+  'prostitution': '100000110000000',
+  'orgasme': '000000000000100',
+  'masturbation': '100000000000100',
+  'orgasme féminin': '000000000010100',
+  'infections sexuellement transmissibles': '100010100000000',
+  'sexologie': '100001000000000',
+  'fantasmes sexuels': '100001000000000',
+  'couple': '000001000000100',
+  'amour': '000001000000100',
+  'relations amoureuses': '000001000000100',
+  'sexualité féminine': '100000000010000',
+  'sexualité masculine': '100000000010000',
+  'femmes': '000000000010000',
+  'hommes': '000000000010000',
+  'homosexualité': '000000000100000',
+  'homosexualité masculine': '000000000100000',
+  'lesbianisme': '000000000100000',
+  'relations hommes-femmes': '000000100010000',
+  'guides touristiques et de visite': '100000000001000',
+  'clubs': '000000000001100',
+  'sauna': '000000000001100',
+  'maisons de prostitution': '100000110001000',
+  'quartiers de la prostitution': '100000110001000',
+  'troubles sexuels': '100010000000000',
+  'organes génitaux': '110000000000000',
+  'séduction': '000000100000100',
+  'sexualité (biologie)': '100000100000000',
+  'photographie de charmes': '000000001000010', 
+  'littérature érotique française': '000000001000010',
+  'photographie érotique': '000000001000010', 
+  'art érotique': '000000001000010',
+  'litérature érotique': '000000001000010',
+  'photographie de nus' : '010000000000010',
+  'nu féminin' : '010000000000010',
+  'image du corps' : '010000000000010',
+  'gynecologie': '010000000000000',
+  'corps humain': '010000000000000',
+  'physiologie': '010000000000000',
+  'sadomasochisme': '10100000000100',
 };
 
 // Convertir les valeurs en listes d'entiers
@@ -77,18 +91,27 @@ for (var i = 0; i < number.length; i++) {
 
     // if result is not diplayed, just keep adding
     if (resultDisplayed === false) {
-      input.innerHTML += e.target.alt;
+      if ("alt" in e.target){
+        input.innerHTML += e.target.alt;
+      }
+      else{
+        input.innerHTML += e.target.id;
+      }
+      
     } else if (resultDisplayed === true && lastChar === "+" || lastChar === "-") {
-      // if result is currently displayed and user pressed an operator
-      // we need to keep on adding to the string for next operation
-      resultDisplayed = false;
-      input.innerHTML += e.target.alt;
+      if ("alt" in e.target){
+        input.innerHTML += e.target.alt;
+      }
+      else{
+        input.innerHTML += e.target.id;
+      }
     } else {
-      // if result is currently displayed and user pressed a number
-      // we need clear the input string and add the new input to start the new opration
-      resultDisplayed = false;
-      input.innerHTML = "";
-      input.innerHTML += e.target.alt;
+      if ("alt" in e.target){
+        input.innerHTML += e.target.alt;
+      }
+      else{
+        input.innerHTML += e.target.id;
+      }
     }
 
   });
@@ -159,7 +182,7 @@ result.addEventListener("click", function() {
     
     offset += 1;
   })
-  
+  console.log(vector_result)
   var most_similar = 0;
   var final_result = "";
   for (const [name, vector] of Object.entries(vecteurs)){
@@ -168,7 +191,6 @@ result.addEventListener("click", function() {
       dt = vector[j] * vector_result[j];
       res += dt;
     }
-    console.log(res)
     if (res > most_similar){
       most_similar = res;
       final_result = name;
