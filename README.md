@@ -1,5 +1,5 @@
 # Hackademia 2023 - Visualiser les sexualités
-## Outil de visualisation dédié aux collections du CMCSS - https://www.unige.ch/cmcss
+## Outil de visualisation dédié aux collections du CMCSS
 
 Outil de visualisation développé à l'Université de Genève les 24 et 25 novembre 2023 dans le cadre de Hackademia : https://www.unige.ch/hackademia/. Il est composé de deux parties :
 
