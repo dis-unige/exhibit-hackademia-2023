@@ -15,48 +15,45 @@ const data = {
   'plaisir': '000000000000100',
   'art': '000000000000010',
   'sociologie': '000000000000001',
-  'relations sexuelles': '100000100000000',
-  'mutilations génitales': '011000000000000',
-  'prostitution': '100000110000000',
-  'orgasme': '000000000000100',
-  'masturbation': '100000000000100',
-  'orgasme féminin': '000000000010100',
-  'infections sexuellement transmissibles': '100010100000000',
-  'sexologie': '100001000000000',
-  'fantasmes sexuels': '100001000000000',
-  'couple': '000001000000100',
-  'amour': '000001000000100',
-  'relations amoureuses': '000001000000100',
-  'sexualité féminine': '100000000010000',
-  'sexualité masculine': '100000000010000',
-  'femmes': '000000000010000',
-  'hommes': '000000000010000',
-  'homosexualité': '000000000100000',
-  'homosexualité masculine': '000000000100000',
-  'lesbianisme': '000000000100000',
-  'relations hommes-femmes': '000000100010000',
-  'guides touristiques et de visite': '100000000001000',
-  'clubs': '000000000001100',
-  'sauna': '000000000001100',
-  'maisons de prostitution': '100000110001000',
-  'quartiers de la prostitution': '100000110001000',
-  'troubles sexuels': '100010000000000',
-  'organes génitaux': '110000000000000',
-  'séduction': '000000100000100',
-  'sexualité (biologie)': '100000100000000',
-  'photographie de charmes': '000000001000010', 
-  'littérature érotique française': '000000001000010',
-  'photographie érotique': '000000001000010', 
-  'art érotique': '000000001000010',
-  'litérature érotique': '000000001000010',
-  'photographie de nus' : '010000000000010',
-  'nu féminin' : '010000000000010',
-  'image du corps' : '010000000000010',
-  'gynecologie': '010000000000000',
-  'corps humain': '010000000000000',
-  'physiologie': '010000000000000',
-  'sadomasochisme': '10100000000100',
+  "Prostitution": "100000110000000",
+  "Prostituées": "100000110000000",
+  "Courtisanes": "100000110000000",
+  "Orgasme": "010000000000100",
+  "Massage": "010000000000100",
+  "Sexologie": "100001000000000",
+  "Fantasmes sexuels": "100001000000000",
+  "Couple": "000001000000100",
+  "Amour": "000001000000100",
+  "Relations amoureuses": "000001000000100",
+  "Sexualité féminine": "100000000010000",
+  "Sexualité masculine": "100000000010000",
+  "Clubs": "000000000001100",
+  "Sauna": "000000000001100",
+  "Cabarets": "000000000001100",
+  "Maisons de prostitution": "100000110001000",
+  "Quartiers de la prostitution": "100000110001000",
+  "Troubles sexuels": "100011000000000",
+  "Photographie de charmes": "000000001000010",
+  "Littérature érotique française": "000000001000010",
+  "Photographie érotique": "000000001000010",
+  "Art érotique": "000000001000010",
+  "Littérature érotique": "000000001000010",
+  "Photographie de nus": "010000000000010",
+  "Nu féminin": "010000000000010",
+  "Image du corps": "010000000000010",
+  "Sadomasochisme": "101000000000100",
+  "Violences sexuelles": "101000000000000",
+  "Morale sexuelle": "000001000000001",
+  "Moeurs et coutumes": "000001000000001",
+  "Mariage": "000000100000001",
+  "Vie sexuelle": "100000000000001",
+  "Grossesse": "010100000000000",
+  "Presse homosexuelle": "000000000100001",
+  "Maternité": "000100000010000",
+  "Désir": "100000000000100",
+  "Homophobie": "001000000100000"
 };
+
 
 // Convertir les valeurs en listes d'entiers
 const vecteurs = {};
@@ -140,6 +137,11 @@ for (var i = 0; i < operator.length; i++) {
   });
 }
 
+document.getElementById("clr").addEventListener("click", function(e){
+  input.innerHTML = "";
+  document.querySelector('[title="Effacer ces sélections"]').click();
+})
+
 // on click of 'equal' button
 result.addEventListener("click", function() {
 
@@ -182,22 +184,26 @@ result.addEventListener("click", function() {
     
     offset += 1;
   })
-  console.log(vector_result)
-  var most_similar = 0;
+  
+  var distance = Number.MAX_VALUE;
   var final_result = "";
   for (const [name, vector] of Object.entries(vecteurs)){
     let res = 0;
     for (let j = 0; j < 15; j++){
-      dt = vector[j] * vector_result[j];
+      dt = Math.pow((vector[j] - vector_result[j]),2);
       res += dt;
     }
-    if (res > most_similar){
-      most_similar = res;
+    if (res < distance){
+      distance = res;
       final_result = name;
     }
   }
 
   input.innerHTML = final_result
+  if (final_result != ""){
+    document.querySelector('[title="Effacer ces sélections"]').click();
+    document.querySelector('[title="'+final_result.charAt(0).toUpperCase() + final_result.slice(1)+'"]').click();
+  }
 
   resultDisplayed = true; // turning flag if result is displayed
 });
