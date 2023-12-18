@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Visualiser les sexualités - Hackademia 2023</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <link rel='stylesheet' href='https://www.simile-widgets.org/styles/common.css' type='text/css' />
+    
+    <link href="publications.js" type="application/json" rel="exhibit/data" />
+    
+    <!-- Replace the URL here with http://api.simile-widgets.org/exhibit/current/exhibit-api.js -->
+    <!--<script src="../api/exhibit-api.js"></script> -->
+    <script src="https://api.simile-widgets.org/exhibit/current/exhibit-api.js" type="text/javascript"></script>
+
+    <!-- Replace the URL here with http://api.simile-widgets.org/exhibit/current/extensions/time/time-extension.js -->
+    <link rel="exhibit-extension" type="text/javascript" href="https://api.simile-widgets.org/exhibit/current/extensions/time/time-extension.js" />
+    
+    <link rel="stylesheet" href="./calculatrice.css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300' rel='stylesheet' type='text/css'>    
+    
+    <link rel='stylesheet' href='styles.css' type='text/css' />
+  </head>
+  <body>
+    <ul id="path">
+      <li><a href="https://www.unige.ch/hackademia/">Hackademia 2023</a></li>
+      <li><a href="https://github.com/dis-unige/hackademia-2023">Visualiser les sexualités</a></li>
+      <li><span>Démo</span></li>
+    </ul>
+    <table id="header">
+        <tr style="vertical-align:top">
+            <td>
+                <h1>Hackademia 2023 - Visualiser les sexualités</h1>
+                <p>Outil de visualisation dédié aux  <a href="https://www.unige.ch/cmcss/collections" target="_blank">collections du CMCSS</a></p>
+                <p>Code source <a href="https://github.com/dis-unige/hackademia-2023" target="_blank">disponible sur Github</a></p>
+            </td>
+        </tr>
+    </table>
+    <div id="body">
+        <div style="width: 100%">
+            <table
+            style="width:100%;border-spacing:10;border:0"
+                   id="exhibit">
+                <tr>
+                    <td style="padding: 10px">
+<div class="calculator">
+    <div class="input" id="input"></div>
+    <div class="buttons">
+      <div class="leftPanel">
+        <div class="numbers">
+            <div id="sexualité"><img src="./img/sexualités.png" alt="sexualité"></div>
+            <div id="anatomie"><img src="./img/le-muscle.png" alt="anatomie"></div>
+            <div id="violence"><img src="./img/pas-dagression.png" alt="violence"></div>
+        </div>
+        <div class="numbers">
+            <div id="reproduction"><img src="./img/reproduction.png" alt="reproduction"></div>
+            <div id="maladie"><img src="./img/rechercher.png" alt="maladie"></div>
+            <div id="psychologie"><img src="./img/psychology.png" alt="psychologie"></div>
+        </div>
+        <div class="numbers">
+            <div id="relation"><img src="./img/relation.png" alt="relation"></div>
+            <div id="orientation sexuelle"><img src="./img/sexual-orientation.png" alt="orientation sexuelle"></div>
+            <div id="géographie"><img src="./img/géographie.png" alt="géographie"></div>
+        </div>
+        <div class="numbers">
+            <div id="pornographie"><img src="./img/porno.png" alt="pornographie">.</div>
+            <div id="genre"><img src="./img/transgender.png" alt="genre"></div>
+            <div id="travail"><img src="./img/work-time.png" alt="travail"></div>
+        </div>
+        <div class="numbers">
+            <div id="plaisir"><img src="./img/plaisir.png" alt="plaisir"></div>
+            <div id="plaisir"><img src="./img/arts.png" alt="art"></div>
+            <div id="sociologie"><img src="./img/sociologie.png" alt="sociologie"></div>
+        </div>
+      </div>
+      <div class="rightPanel">
+        <div class="operators">
+            <div id="clr">CLEAR</div>
+            <div>+</div>
+            <div>-</div>
+            <div class="equal" id="result">=</div>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+                    </td>
+                    <td>
+                        <div data-ex-role="viewPanel">
+                            <div data-ex-role="lens" class="item" style="display: none;">
+                                <table style="border-spacing:5">
+                                    <tr>
+                                        <td style="position: relative"><div class="itemThumbnail-blocker"></div><img data-ex-src-content=".image" /></td>
+                                        <td>
+                                            <h1><span data-ex-content=".title" ></span></h1>
+                                            <h1><span data-ex-content=".pubdate"></h1>
+                                            <h2><span data-ex-content=".auteur"></span></h2>
+                                            <h2><span data-ex-content=".sujet"></span></h2>
+                                            <p data-ex-content=".texte"></p>
+                                            <div style="text-align:center"><a data-ex-href-content=".url" target="new">Plus d'informations...</a></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div data-ex-role="view" 
+                                data-ex-view-class="Thumbnail"
+                                data-ex-show-all="true"
+                                data-ex-paginate="true"
+                                data-ex-possible-orders=".date, .auteur, .sujet">
+                          
+                                <table data-ex-role="lens" class="itemThumbnail" style="display: none;">
+                                    <tr>
+                                        <td style="vertial-align:bottom" class="itemThumbnail-thumbnailContainer">
+                                            <div style="position: relative"><div class="itemThumbnail-blocker"></div><img data-ex-src-content=".thumbnail" class="bookcover"/></div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="itemThumbnail-caption"><span data-ex-content="value"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div data-ex-role="view" 
+                                data-ex-view-class="Timeline"
+                                data-ex-start=".date"
+                                data-ex-color-key=".sujet"
+                                 data-ex-iconkey=".sujet"
+                                 data-ex-icon-coder="icons"
+                                data-ex-top-band-unit="year"
+                                data-ex-top-band-pixels-per-unit="50"
+                                data-ex-bottom-band-unit="year"
+                                data-ex-bottom-band-pixels-per-unit="50"
+                                data-ex-bubble-width="400"
+                                data-ex-bubble-height="250">
+                            </div>
+                        </div>
+                    </td>
+                    <td style="display:none;">
+                        <b>Search</b>
+                        <div data-ex-role="facet" data-ex-facet-class="TextSearch"></div>
+                        <hr/>
+                        <div data-ex-role="facet" data-ex-expression=".sujet" data-ex-facet-label="Sujet" data-ex-height="15em"></div>
+                        <div data-ex-role="facet" data-ex-expression=".pubdate" data-ex-facet-label="Date" data-ex-height="20em"></div>
+                        <div data-ex-role="facet" data-ex-expression=".auteur" data-ex-facet-label="Auteur" data-ex-height="15em"></div>
+                        <div data-ex-role="facet" data-ex-expression=".type" data-ex-facet-label="Type" data-ex-height="20em"></div>
+                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+  </body>
+<script src="./calculatrice.js"></script>
+</html>
